@@ -1,0 +1,23 @@
+{
+  "name": "jmau/jm-twitter-cards-first-image",
+  "keywords": [
+    "WordPress",
+    "twitter",
+    "cards",
+    "meta"
+  ],
+  "homepage": "https://github.com/jmau111/jm-twitter-cards-first-image",
+  "license": "GPL-2.0+",
+  "authors": [
+    {
+      "name": "jmau111",
+      "email": "https://julien-maury.dev"
+    }
+  ],
+  "type": "wordpress-plugin",
+  "description": "Adds ability to JM Twitter Cards to grab first image of content as twitter meta image",
+  "require": {
+    "composer/installers": "~1.0",
+    "php": ">=5.3.0"
+  }
+}
