@@ -5,7 +5,7 @@ Plugin URI: https://julien-maury.dev
 Description: Meant to grab first image of post content as twitter card image. Requires JM Twitter Cards
 Author: Julien Maury
 Author URI: https://julien-maury.dev
-Version: 1.0
+Version: 1.1
 License: GPL2++
 
 JM Twitter Cards Plugin
@@ -26,31 +26,32 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 // Add some security, no direct load !
-defined( 'ABSPATH' )
-	or die( 'No direct load !' );
+defined('ABSPATH')
+    or die('No direct load !');
 
-add_filter( 'jm_tc_image_source', 'jm_tc_grab_first_image' );
-function jm_tc_grab_first_image( $image ) {
+add_filter('jm_tc_image_source', 'jm_tc_grab_first_image');
+function jm_tc_grab_first_image($image)
+{
 
-	if ( ! is_singular() ) {
-		return $image;
-	}
-	
-	global $post;
+    if (!is_singular()) {
+        return $image;
+    }
 
-	if ( has_post_thumbnail( $post ) || get_post_meta( $post->ID, 'cardImage', true ) ) {
-		return $image;
-	}
+    global $post;
 
-	if ( preg_match_all( '`<img [^>]+>`',  $post->post_content, $matches ) ) {
+    if (has_post_thumbnail($post) || get_post_meta($post->ID, 'cardImage', true)) {
+        return $image;
+    }
 
-		$_matches = reset( $matches );
-		foreach ( $_matches as $image ) {
-			if ( preg_match( '`src=(["\'])(.*?)\1`', $image, $_match ) ) {
-				return $_match[2];
-			}
-		}
-	}
+    if (preg_match_all('`<img [^>]+>`',  $post->post_content, $matches)) {
 
-	return $image;
+        $_matches = reset($matches);
+        foreach ($_matches as $image) {
+            if (preg_match('`src=(["\'])(.*?)\1`', $image, $_match)) {
+                return $_match[2];
+            }
+        }
+    }
+
+    return $image;
 }
